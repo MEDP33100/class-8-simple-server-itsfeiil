@@ -1,1 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Facts Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+            text-align: center;
+            color: #333;
+            padding: 50px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            max-width: 600px;
+            transition: transform 0.3s;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        #fact {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            min-height: 50px;
+        }
+
+        .button {
+            display: inline-block;
+            background: #ff4757;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .button:hover {
+            background: #e84118;
+            transform: scale(1.1);
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Did You Know? 🤯</h1>
+        <p id="fact">Click the button to learn a fun fact!</p>
+        <button class="button" onclick="fetchFunFact()">Get a Fun Fact</button>
+    </div>
+
+    <footer>© 2025 Fun Facts Generator. Xiaofei Liu.</footer>
+
+    <script>
+        function fetchFunFact() {
+            fetch("/funfact")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("fact").innerText = data.fact;
+                })
+                .catch(error => {
+                    document.getElementById("fact").innerText = "Oops! Something went wrong.";
+                });
+        }
+    </script>
+</body>
+</html>
